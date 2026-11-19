@@ -1,1 +1,175 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Olimplist — перечневые олимпиады в одном месте</title>
+<meta name="description" content="Каталог перечневых олимпиад школьников 2026/2027: сроки этапов, уровни, льготы и фильтры. Обновляется каждые 12 часов.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('olimplist.theme')||'light'}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
+<div class="grain" aria-hidden="true"></div>
 
+<header class="nav">
+  <a class="brand" href="#top">
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 2l2.6 6.2 6.7.5-5.1 4.4 1.6 6.6L12 16.2 6.2 19.7l1.6-6.6-5.1-4.4 6.7-.5z" fill="url(#g)"/><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F5A524"/><stop offset="1" stop-color="#E8447A"/></linearGradient></defs></svg>
+    Olimplist
+  </a>
+  <nav class="links" id="navLinks" aria-label="Разделы сайта">
+    <a href="#deadline">Дедлайны</a>
+    <a href="#catalog">Каталог</a>
+    <a href="#how">Как работает</a>
+    <a href="#about">О проекте</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="btn ghost small" id="favBtn" aria-label="Показать избранные олимпиады">★ <span id="favCount">0</span></button>
+    <button class="icon-btn" id="themeBtn" aria-label="Переключить тему">
+      <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4.4" fill="currentColor"/><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3L19 19M19 5l-1.7 1.7M6.7 17.3L5 19"/></g></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow reveal">Перечень Минобрнауки · 2026/2027 · приказ № 521</p>
+      <h1 class="reveal" style="--d:.08s">Все перечневые олимпиады.<br><em>Один сайт. Ноль пропущенных дедлайнов.</em></h1>
+      <p class="lead reveal" style="--d:.16s">Olimplist собирает сроки этапов, уровни и льготы олимпиад из официального перечня и обновляет их каждые 12 часов — чтобы ты регистрировался вовремя, а не вспоминал в марте.</p>
+      <div class="hero-cta reveal" style="--d:.24s">
+        <a class="btn primary" href="#catalog">Открыть каталог</a>
+        <a class="btn ghost light" href="#deadline">Ближайшие дедлайны</a>
+      </div>
+      <dl class="stats reveal" style="--d:.32s" id="stats">
+        <div><dt id="statTotal">0</dt><dd>соревнований в перечне</dd></div>
+        <div><dt id="statCatalog">0</dt><dd>олимпиад в каталоге</dd></div>
+        <div><dt id="statFav">0</dt><dd>в твоём списке</dd></div>
+        <div><dt id="statNext">—</dt><dd>дней до ближайшего дедлайна</dd></div>
+      </dl>
+    </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+  </section>
+
+  <section class="section" id="deadline" style="--acc:var(--red)">
+    <div class="sec-head reveal"><span class="sec-num">01</span><h2>Календарь дедлайнов</h2><p>Ближайшие завершения этапов со всех олимпиад каталога — в одном списке, без переходов по сайтам.</p></div>
+    <div class="deadline-wrap">
+      <aside class="deadline-side reveal">
+        <h3>Как читать цвета</h3>
+        <p class="legend"><i style="--c:var(--red)"></i> меньше 7 дней — действуй сейчас</p>
+        <p class="legend"><i style="--c:var(--gold)"></i> до 30 дней — запланируй</p>
+        <p class="legend"><i style="--c:var(--blue)"></i> больше 30 дней — есть запас</p>
+        <button class="btn primary wide" id="icsAll">Скачать дедлайны в .ics</button>
+        <p class="hint">Файл открывается в Google Calendar, Apple Calendar и Яндекс.Календаре и напомнит о каждом этапе.</p>
+      </aside>
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+  </section>
+
+  <section class="section" id="catalog" style="--acc:var(--blue)">
+    <div class="sec-head reveal"><span class="sec-num">02</span><h2>Каталог олимпиад</h2><p id="catalogSub">Фильтры работают мгновенно: предмет, уровень, класс, статус этапа.</p></div>
+    <div class="catalog">
+      <aside class="filters" aria-label="Фильтры каталога">
+        <label class="f-label" for="q">Поиск</label>
+        <input id="q" type="search" placeholder="Название, предмет, вуз…" autocomplete="off">
+        <span class="f-label">Предметы</span>
+        <div class="chips" id="subjectChips"></div>
+        <span class="f-label">Уровень</span>
+        <div class="seg" id="levelSeg">
+          <button data-level="0" class="on">Все</button><button data-level="1">I</button><button data-level="2">II</button><button data-level="3">III</button>
+        </div>
+        <label class="f-label" for="grade">Класс</label>
+        <select id="grade"><option value="0">Любой</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>
+        <label class="f-label" for="status">Статус этапа</label>
+        <select id="status"><option value="all">Любой</option><option value="open">Идёт сейчас</option><option value="soon">Скоро откроется</option><option value="ended">Завершена</option></select>
+        <label class="f-label" for="sort">Сортировка</label>
+        <select id="sort"><option value="deadline">По дедлайну</option><option value="level">По уровню</option><option value="name">По названию</option></select>
+        <label class="switch"><input type="checkbox" id="favOnly"><span></span>Только избранное</label>
+        <label class="switch"><input type="checkbox" id="hideEnded"><span></span>Скрыть завершённые</label>
+        <div class="f-row">
+          <button class="btn ghost small" id="resetFilters">Сбросить</button>
+          <button class="btn ghost small" id="saveView">Сохранить вид</button>
+        </div>
+        <div class="views" id="views"></div>
+      </aside>
+      <div class="results">
+        <div class="results-bar"><span id="count"></span><div class="active" id="activeChips"></div></div>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty" hidden>
+          <svg viewBox="0 0 64 64" width="72" height="72" aria-hidden="true"><circle cx="28" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="3"/><path d="M40 40l14 14" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M22 28h12M28 22v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity=".5"/></svg>
+          <h3>Ничего не нашлось</h3>
+          <p>Попробуй убрать часть фильтров или сбросить их полностью.</p>
+          <button class="btn primary" id="emptyReset">Сбросить фильтры</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how" style="--acc:var(--teal)">
+    <div class="sec-head reveal"><span class="sec-num">03</span><h2>Как это работает</h2><p>Сайт статический, а данные живые: их приносит парсер по расписанию, без ручного вмешательства.</p></div>
+    <div class="how-grid">
+      <div class="pipeline reveal">
+        <div class="node"><b>Сайты олимпиад</b><span>официальные источники и rsosh.ru</span></div>
+        <div class="node"><b>Парсер</b><span>GitHub Actions · cron каждые 12 ч</span></div>
+        <div class="node"><b>olympiads.json</b><span>коммит в репозиторий только при изменениях</span></div>
+        <div class="node"><b>GitHub Pages</b><span>браузер читает JSON и рисует каталог</span></div>
+        <i class="flow" aria-hidden="true"></i>
+      </div>
+      <div class="status-card reveal" style="--d:.1s">
+        <div class="row"><span>Последнее обновление</span><b id="updatedAt">—</b></div>
+        <div class="row"><span>Следующее через</span><b id="nextUpdate">—</b></div>
+        <div class="row"><span>Источник</span><b id="srcName">—</b></div>
+        <div class="row col"><span>Покрытие перечня</span><div class="bar"><i id="covBar"></i></div><b id="covText">—</b></div>
+        <p class="badge-ok">Автономно · при сбое парсера показываются последние хорошие данные</p>
+      </div>
+      <ul class="criteria reveal" style="--d:.16s">
+        <li><b>Кроссплатформенность</b>адаптив от 360 до 1920 px, без горизонтальной прокрутки</li>
+        <li><b>Актуальность</b>цикл обновления 12 часов — чаще, чем раз в сутки</li>
+        <li><b>Быстрый отклик</b>статика без тяжёлых библиотек, один JSON-запрос</li>
+        <li><b>Разделы и фильтры</b>предмет, уровень, класс, статус, сортировка, сохранённые виды</li>
+        <li><b>Полнота карточки</b>предметы, уровень, классы, даты этапов, льготы, ссылка</li>
+        <li><b>Безопасность</b>все данные экранируются перед выводом, ссылки только https</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="about" style="--acc:var(--violet)">
+    <div class="sec-head reveal"><span class="sec-num">04</span><h2>О проекте</h2><p>Индивидуальный проект ученика 10 класса: от проблемы пропущенных регистраций до работающего веб-продукта.</p></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>Каждый год десятки перечневых олимпиад дают шанс поступить в ведущие вузы без вступительных испытаний или получить 100 баллов за профильный ЕГЭ. Но информация о них раздроблена: официальный портал перечня содержит только названия, а сроки и льготы приходится искать вручную на сайтах каждой олимпиады. Из-за этого школьники пропускают регистрации и этапы.</p>
+        <p>Olimplist решает эту проблему: единый каталог с фильтрами, календарём дедлайнов и напоминаниями. Цель проекта — до конца марта 2027 года разработать и разместить сайт в интернете и проверить опросом, помогает ли он школьникам разбираться в олимпиадах.</p>
+      </div>
+      <div class="about-card reveal" style="--d:.1s">
+        <h3>Проектный продукт</h3>
+        <p>Общедоступный веб-сайт, где собрана и упорядочена вся необходимая информация для регистрации и участия в перечневых олимпиадах.</p>
+        <dl>
+          <div><dt>Автор</dt><dd>Мочалов Григорий, 10а класс</dd></div>
+          <div><dt>Школа</dt><dd>МБОУ «Лицей № 165 имени 65-летия ГАЗ», г. Нижний Новгород</dd></div>
+          <div><dt>Руководитель</dt><dd>Ведешкина Н. Е., учитель информатики</dd></div>
+          <div><dt>Стек</dt><dd>HTML · CSS · JavaScript · Python · GitHub Pages · GitHub Actions</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>Olimplist · школьный индивидуальный проект · перечень Минобрнауки 2026/2027 · обновлено <span id="footUpdated">—</span></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+  <button class="icon-btn close" id="dClose" aria-label="Закрыть карточку">✕</button>
+  <div id="dBody"></div>
+</aside>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script type="application/json" id="olimp-seed">
+{"meta":{"perechen":"2026/2027","order":"Приказ Минобрнауки России от 31.08.2026 № 521","total":60,"cycleHours":12,"updatedAt":"2026-11-19T03:00:00","source":"rsosh.ru и сайты олимпиад","note":"Стартовый набор каталога; полный перечень формирует парсер по расписанию."},"items":[{"id":"vysshaya-proba","name":"Высшая проба","organizer":"НИУ ВШЭ","level":1,"subjects":["математика","экономика","обществознание","информатика","право"],"grades":[8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-05","end":"2026-12-15"},{"name":"Заключительный этап","start":"2027-02-05","end":"2027-03-15"}],"bvi":true,"url":"https://olymp.hse.ru/"},{"id":"lomonosov","name":"Ломоносов","organizer":"МГУ им. М. В. Ломоносова","level":1,"subjects":["математика","физика","химия","биология","обществознание","история"],"grades":[5,6,7,8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-20","end":"2026-12-10"},{"name":"Заключительный этап","start":"2027-02-10","end":"2027-03-20"}],"bvi":true,"url":"https://lomonosov-msu.ru/"},{"id":"pvg","name":"Покори Воробьёвы горы!","organizer":"МГУ им. М. В. Ломоносова","level":1,"subjects":["математика","физика","химия","биология","география","история"],"grades":[5,6,7,8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-15","end":"2026-12-05"},{"name":"Заключительный этап","start":"2027-02-15","end":"2027-03-10"}],"bvi":true,"url":"https://pvg.mk.ru/"},{"id":"fiztech","name":"Физтех","organizer":"МФТИ","level":1,"subjects":["математика","физика"],"grades":[9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-09-20","end":"2026-11-24"},{"name":"Заключительный этап","start":"2027-02-20","end":"2027-03-05"}],"bvi":true,"url":"https://olymp.mipt.ru/"},{"id":"rosatom","name":"Росатом","organizer":"НИЯУ МИФИ","level":1,"subjects":["математика","физика","информатика"],"grades":[7,8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-01","end":"2026-11-26"},{"name":"Заключительный этап","start":"2027-01-25","end":"2027-02-15"}],"bvi":true,"url":"https://rosatom-olymp.ru/"},{"id":"kurchatov","name":"Курчатов","organizer":"НИЦ «Курчатовский институт»","level":2,"subjects":["математика","физика","химия","биология"],"grades":[8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-11-01","end":"2027-01-15"},{"name":"Заключительный этап","start":"2027-02-10","end":"2027-03-01"}],"bvi":true,"url":"https://kurchatov-olymp.ru/"},{"id":"spbu","name":"Олимпиада школьников СПбГУ","organizer":"СПбГУ","level":2,"subjects":["математика","физика","химия","биология","история","обществознание","право"],"grades":[6,7,8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-10","end":"2026-12-25"},{"name":"Заключительный этап","start":"2027-01-20","end":"2027-02-28"}],"bvi":true,"url":"https://olymp.spbu.ru/"},{"id":"step-budushchee","name":"Шаг в будущее","organizer":"МГТУ им. Н. Э. Баумана","level":2,"subjects":["математика","физика","информатика"],"grades":[8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-01","end":"2026-12-10"},{"name":"Заключительный этап","start":"2027-02-01","end":"2027-03-05"}],"bvi":true,"url":"https://step.bmstu.ru/"},{"id":"nadezhda-energetiki","name":"Надежда энергетики","organizer":"НИУ «МЭИ»","level":3,"subjects":["математика","физика","информатика"],"grades":[9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-15","end":"2026-12-01"},{"name":"Заключительный этап","start":"2027-01-15","end":"2027-02-10"}],"bvi":false,"url":"https://olymp.mpei.ru/"},{"id":"granit-nauki","name":"Гранит науки","organizer":"Санкт-Петербургский горный университет","level":3,"subjects":["математика","физика","химия"],"grades":[8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-11-10","end":"2027-01-20"},{"name":"Заключительный этап","start":"2027-02-15","end":"2027-03-05"}],"bvi":false,"url":"https://olymp.spmi.ru/"},{"id":"yunye-talanty","name":"Юные таланты","organizer":"ПГНИУ","level":3,"subjects":["химия","биология","география"],"grades":[6,7,8,9,10,11],"stages":[{"name":"Отборочный этап","start":"2026-10-01","end":"2026-11-30"},{"name":"Заключительный этап","start":"2027-01-25","end":"2027-02-20"}],"bvi":false,"url":"https://olymp.psu.ru/"}]}
+</script>
+<script src="js/app.js"></script>
+</body>
+</html>
