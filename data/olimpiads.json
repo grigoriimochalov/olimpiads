@@ -4,10 +4,10 @@
     "order": "Приказ Минобрнауки России от 31.08.2026 № 521",
     "total": 60,
     "cycleHours": 12,
-    "updatedAt": "2026-11-20T19:40:17",
+    "updatedAt": "2026-11-21T05:44:30",
     "source": "rsosh.ru и сайты олимпиад",
     "note": "Стартовый набор каталога; полный перечень формирует парсер по расписанию.",
-    "verified": 1,
+    "verified": 0,
     "okCount": 5,
     "fallbackCount": 6
   },
@@ -46,7 +46,7 @@
       "url": "https://olymp.hse.ru/",
       "sourceOk": true,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:37:37"
+      "checkedAt": "2026-11-21T05:41:50"
     },
     {
       "id": "lomonosov",
@@ -85,8 +85,8 @@
       "bvi": true,
       "url": "https://lomonosov-msu.ru/",
       "sourceOk": true,
-      "datesVerified": true,
-      "checkedAt": "2026-11-20T19:37:41"
+      "datesVerified": false,
+      "checkedAt": "2026-11-21T05:41:53"
     },
     {
       "id": "pvg",
@@ -126,7 +126,7 @@
       "url": "https://pvg.mk.ru/",
       "sourceOk": true,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:37:47"
+      "checkedAt": "2026-11-21T05:42:00"
     },
     {
       "id": "fiztech",
@@ -158,7 +158,7 @@
       "url": "https://olymp.mipt.ru/",
       "sourceOk": false,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:37:51"
+      "checkedAt": "2026-11-21T05:42:05"
     },
     {
       "id": "rosatom",
@@ -193,7 +193,7 @@
       "url": "https://rosatom-olymp.ru/",
       "sourceOk": false,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:39:23"
+      "checkedAt": "2026-11-21T05:43:36"
     },
     {
       "id": "kurchatov",
@@ -228,7 +228,7 @@
       "url": "https://kurchatov-olymp.ru/",
       "sourceOk": false,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:39:31"
+      "checkedAt": "2026-11-21T05:43:44"
     },
     {
       "id": "spbu",
@@ -268,7 +268,7 @@
       "url": "https://olymp.spbu.ru/",
       "sourceOk": true,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:39:39"
+      "checkedAt": "2026-11-21T05:43:52"
     },
     {
       "id": "step-budushchee",
@@ -302,7 +302,7 @@
       "url": "https://step.bmstu.ru/",
       "sourceOk": false,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:39:43"
+      "checkedAt": "2026-11-21T05:43:56"
     },
     {
       "id": "nadezhda-energetiki",
@@ -335,7 +335,7 @@
       "url": "https://olymp.mpei.ru/",
       "sourceOk": false,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:39:53"
+      "checkedAt": "2026-11-21T05:44:06"
     },
     {
       "id": "granit-nauki",
@@ -369,7 +369,7 @@
       "url": "https://olymp.spmi.ru/",
       "sourceOk": false,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:40:02"
+      "checkedAt": "2026-11-21T05:44:17"
     },
     {
       "id": "yunye-talanty",
@@ -405,7 +405,7 @@
       "url": "https://olymp.psu.ru/",
       "sourceOk": true,
       "datesVerified": false,
-      "checkedAt": "2026-11-20T19:40:12"
+      "checkedAt": "2026-11-21T05:44:25"
     }
   ]
 }
